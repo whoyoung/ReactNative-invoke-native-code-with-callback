@@ -27,11 +27,19 @@
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  UIViewController *rootViewController = [UIViewController new];
-  rootViewController.view = rootView;
-  self.window.rootViewController = rootViewController;
+  _rootViewController = [UIViewController new];
+  _rootViewController.view = rootView;
+  self.window.rootViewController = _rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
 }
 
+- (void)sendAppEvent:(NSString *)name body:(NSDictionary *)data {
+  RCTBridge *bridge = ((RCTRootView *)(self.rootViewController.view)).bridge;
+  [bridge enqueueJSCall:@"RCTNativeAppEventEmitter"
+                 method:@"emit"
+                   args:data ? @[name, data] : @[name]
+             completion:NULL];
+
+}
 @end

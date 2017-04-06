@@ -27,6 +27,6 @@ export function clickNotiBtn() {
     }
 }
 
-export function changeNotiBtn() {
-    return {type: types.yh_appEntranceModule_noti,title:'notiChanged'};
+export function changeNotiBtn(title) {
+    return {type: types.yh_appEntranceModule_noti,title:title};
 }

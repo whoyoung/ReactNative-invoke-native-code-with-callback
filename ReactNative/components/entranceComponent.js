@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 
 export default class reactNativeInvokeNativeCode extends Component {
+    componentWillMount() {
+      this.notiEvent = DeviceEventEmitter.addListener('notificationCallBackEvent',(value)=>{
+          this.props.actions.changeNotiBtn(value.title);
+      })
+    }
+    componentDidMount() {
+    }
+    componentWillUnmount() {
+      this.notiEvent.remove();
+    }
+
     _noCallBack() {
       this.props.actions.clickBtn();
     }
@@ -37,7 +49,9 @@ export default class reactNativeInvokeNativeCode extends Component {
         }}>
           {delegateTitle}
         </Text>
-        <Text style={styles.callback}>
+        <Text style={styles.callback} onPress={()=>{
+            this._notificationCallBack();
+        }}>
           {notificationTitle}
         </Text>
       </View>

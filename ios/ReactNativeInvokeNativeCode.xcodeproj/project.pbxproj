@@ -35,6 +35,7 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* ReactNativeInvokeNativeCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ReactNativeInvokeNativeCodeTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		6FE752B81E96A4EB00F1653D /* AppEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE752B71E96A4EB00F1653D /* AppEventEmitter.m */; };
 		77202F851E96214B0060C675 /* YHCallBackModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 77202F841E96214B0060C675 /* YHCallBackModule.m */; };
 		77202FA11E9622BA0060C675 /* NativePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77202FA01E9622BA0060C675 /* NativePageViewController.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -255,6 +256,8 @@
 		2D02E47B1E0B4A5D006451C7 /* ReactNativeInvokeNativeCode-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReactNativeInvokeNativeCode-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ReactNativeInvokeNativeCode-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReactNativeInvokeNativeCode-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6FE752B61E96A4EB00F1653D /* AppEventEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppEventEmitter.h; sourceTree = "<group>"; };
+		6FE752B71E96A4EB00F1653D /* AppEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppEventEmitter.m; sourceTree = "<group>"; };
 		77202F831E96214B0060C675 /* YHCallBackModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHCallBackModule.h; sourceTree = "<group>"; };
 		77202F841E96214B0060C675 /* YHCallBackModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHCallBackModule.m; sourceTree = "<group>"; };
 		77202F9F1E9622BA0060C675 /* NativePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativePageViewController.h; sourceTree = "<group>"; };
@@ -406,6 +409,8 @@
 				77202F841E96214B0060C675 /* YHCallBackModule.m */,
 				77202F9F1E9622BA0060C675 /* NativePageViewController.h */,
 				77202FA01E9622BA0060C675 /* NativePageViewController.m */,
+				6FE752B61E96A4EB00F1653D /* AppEventEmitter.h */,
+				6FE752B71E96A4EB00F1653D /* AppEventEmitter.m */,
 			);
 			name = ReactNativeInvokeNativeCode;
 			sourceTree = "<group>";
@@ -916,6 +921,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77202FA11E9622BA0060C675 /* NativePageViewController.m in Sources */,
+				6FE752B81E96A4EB00F1653D /* AppEventEmitter.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				77202F851E96214B0060C675 /* YHCallBackModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,

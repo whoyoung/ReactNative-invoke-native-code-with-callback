@@ -8,7 +8,7 @@
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #import "NativePageViewController.h"
-
+#import "AppEventEmitter.h"
 @interface NativePageViewController ()
 
 @end
@@ -71,6 +71,7 @@
 }
 
 - (void)notificationBtnClick {
+  [AppEventEmitter sendAppEvent:@"notificationCallBackEvent" body:@{@"title":@"notiChanged"}];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
