@@ -14,6 +14,16 @@ export default function entranceReducer(state = initState, action = {}) {
                     ...state,
                     blockTitle:action.title,
             }
+        case types.yh_appEntranceModule_delegate: 
+            return {
+                    ...state,
+                    delegateTitle:action.title,
+            }
+        case types.yh_appEntranceModule_noti: 
+            return {
+                    ...state,
+                    notificationTitle:action.title,
+            }
         default: 
             return state;
     }

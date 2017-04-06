@@ -6,15 +6,24 @@ import {
 } from 'react-native';
 
 export default class reactNativeInvokeNativeCode extends Component {
-  _blockCallBack() {
+    _noCallBack() {
+      this.props.actions.clickBtn();
+    }
+    _blockCallBack() {
       this.props.actions.clickBlockBtn();
+    }
+    _delegateCallBack() {
+      this.props.actions.clickDelegateBtn();
+    }
+    _notificationCallBack() {
+      this.props.actions.clickNotiBtn();
     }
   render() {
     let {noCallBackTitle,blockTitle,delegateTitle,notificationTitle} = this.props.state;
     return (
       <View style={styles.container}>
         <Text style={styles.callback} onPress={()=>{
-            YHCallBackModule.pushNoCallBack();
+            this._noCallBack();
         }}>
           {noCallBackTitle}
         </Text>
@@ -23,7 +32,9 @@ export default class reactNativeInvokeNativeCode extends Component {
         }}>
           {blockTitle}
         </Text>
-        <Text style={styles.callback}>
+        <Text style={styles.callback} onPress={()=>{
+            this._delegateCallBack();
+        }}>
           {delegateTitle}
         </Text>
         <Text style={styles.callback}>
@@ -47,6 +58,6 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor:'green',
     color:'white',
-    width:150
+    width:180
   },
 });

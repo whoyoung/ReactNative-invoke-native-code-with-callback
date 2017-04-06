@@ -15,7 +15,16 @@ typedef NS_ENUM(NSInteger,CallBackType) {
 };
 
 typedef void(^callBackBlock) (NSString *changeTitle);
+
+@protocol NativePageViewControllerDelegate <NSObject>
+
+@optional
+- (void)delegateBtnClick:(NSString *)changeTitle;
+
+@end
+
 @interface NativePageViewController : UIViewController
 @property (nonatomic,assign) CallBackType callBackType;
 @property (nonatomic,copy) callBackBlock block;
+@property (nonatomic,weak) id<NativePageViewControllerDelegate> delegate;
 @end

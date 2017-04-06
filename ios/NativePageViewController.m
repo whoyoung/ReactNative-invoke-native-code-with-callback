@@ -64,6 +64,9 @@
 }
 
 - (void)delegateBtnClick {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(delegateBtnClick:)]) {
+    [self.delegate delegateBtnClick:@"delegateChanged"];
+  }
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 

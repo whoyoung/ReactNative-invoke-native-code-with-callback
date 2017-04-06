@@ -9,6 +9,10 @@
 #import "YHCallBackModule.h"
 #import "NativePageViewController.h"
 
+@interface YHCallBackModule()<NativePageViewControllerDelegate>
+@property (nonatomic,strong) RCTPromiseResolveBlock resolve;
+@end
+
 @implementation YHCallBackModule
 RCT_EXPORT_MODULE();
 
@@ -35,6 +39,35 @@ RCT_REMAP_METHOD(pushBlockCallBack,
   nativePageVC.block = ^(NSString *title) {
     resolve(title);
   };
+  navController.viewControllers = @[nativePageVC];
+  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
+}
+
+RCT_REMAP_METHOD(pushDelegateCallBack,
+                 resolver1:(RCTPromiseResolveBlock)resolve
+                 rejecter1:(RCTPromiseRejectBlock)reject) {
+  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
+  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
+  navController.navigationBar.barTintColor = [UIColor blueColor];
+  
+  NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
+  nativePageVC.callBackType = CallBackDelegate;
+  nativePageVC.delegate = self;
+  _resolve = resolve;
+  navController.viewControllers = @[nativePageVC];
+  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
+}
+- (void)delegateBtnClick:(NSString *)changeTitle {
+  _resolve(changeTitle);
+}
+
+RCT_EXPORT_METHOD(pushNotiCallBack) {
+  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
+  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
+  navController.navigationBar.barTintColor = [UIColor blueColor];
+  
+  NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
+  nativePageVC.callBackType = CallBackNotification;
   navController.viewControllers = @[nativePageVC];
   [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
 }
