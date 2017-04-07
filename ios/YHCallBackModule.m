@@ -16,10 +16,19 @@
 @implementation YHCallBackModule
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(pushNoCallBack) {
+- (dispatch_queue_t)methodQueue {
+  return dispatch_get_main_queue();
+}
+
+- (UINavigationController *)navigationCont {
   UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
   navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
   navController.navigationBar.barTintColor = [UIColor blueColor];
+  return navController;
+}
+
+RCT_EXPORT_METHOD(pushNoCallBack) {
+  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackNo;
@@ -30,9 +39,7 @@ RCT_EXPORT_METHOD(pushNoCallBack) {
 RCT_REMAP_METHOD(pushBlockCallBack,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
-  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
-  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
-  navController.navigationBar.barTintColor = [UIColor blueColor];
+  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackBlock;
@@ -46,9 +53,7 @@ RCT_REMAP_METHOD(pushBlockCallBack,
 RCT_REMAP_METHOD(pushDelegateCallBack,
                  resolver1:(RCTPromiseResolveBlock)resolve
                  rejecter1:(RCTPromiseRejectBlock)reject) {
-  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
-  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
-  navController.navigationBar.barTintColor = [UIColor blueColor];
+  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackDelegate;
@@ -62,13 +67,13 @@ RCT_REMAP_METHOD(pushDelegateCallBack,
 }
 
 RCT_EXPORT_METHOD(pushNotiCallBack) {
-  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
-  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
-  navController.navigationBar.barTintColor = [UIColor blueColor];
+  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackNotification;
   navController.viewControllers = @[nativePageVC];
   [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
 }
+
+
 @end
