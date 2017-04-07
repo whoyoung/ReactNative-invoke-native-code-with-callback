@@ -29,7 +29,13 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   _rootViewController = [UIViewController new];
   _rootViewController.view = rootView;
-  self.window.rootViewController = _rootViewController;
+  _rootViewController.title = @"React-Native Page";
+  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
+  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
+  navController.navigationBar.barTintColor = [UIColor blueColor];
+  navController.viewControllers = @[_rootViewController];
+
+  self.window.rootViewController = navController;
   [self.window makeKeyAndVisible];
   return YES;
 }

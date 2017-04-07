@@ -53,26 +53,26 @@
 }
 
 - (void)noCallBackBtnClick {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)blockBtnClick {
   if (self.block) {
     self.block(@"blockChanged");
   }
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self noCallBackBtnClick];
 }
 
 - (void)delegateBtnClick {
   if (self.delegate && [self.delegate respondsToSelector:@selector(delegateBtnClick:)]) {
     [self.delegate delegateBtnClick:@"delegateChanged"];
   }
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self noCallBackBtnClick];
 }
 
 - (void)notificationBtnClick {
   [AppEventEmitter sendAppEvent:@"notificationCallBackEvent" body:@{@"title":@"notiChanged"}];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self noCallBackBtnClick];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,7 @@
 
 #import "YHCallBackModule.h"
 #import "NativePageViewController.h"
+#import "AppDelegate.h"
 
 @interface YHCallBackModule()<NativePageViewControllerDelegate>
 @property (nonatomic,strong) RCTPromiseResolveBlock resolve;
@@ -20,59 +21,53 @@ RCT_EXPORT_MODULE();
   return dispatch_get_main_queue();
 }
 
-- (UINavigationController *)navigationCont {
-  UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[UINavigationBar class] toolbarClass:nil];
-  navController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
-  navController.navigationBar.barTintColor = [UIColor blueColor];
-  return navController;
+- (AppDelegate *)mainAppDelegate {
+  return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 RCT_EXPORT_METHOD(pushNoCallBack) {
-  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackNo;
-  navController.viewControllers = @[nativePageVC];
-  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
+
+  AppDelegate *mainDelegate = [self mainAppDelegate];
+  [mainDelegate.rootViewController.navigationController pushViewController:nativePageVC animated:YES];
 }
 
 RCT_REMAP_METHOD(pushBlockCallBack,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
-  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackBlock;
   nativePageVC.block = ^(NSString *title) {
     resolve(title);
   };
-  navController.viewControllers = @[nativePageVC];
-  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
+  AppDelegate *mainDelegate = [self mainAppDelegate];
+  [mainDelegate.rootViewController.navigationController pushViewController:nativePageVC animated:YES];
 }
 
 RCT_REMAP_METHOD(pushDelegateCallBack,
                  resolver1:(RCTPromiseResolveBlock)resolve
                  rejecter1:(RCTPromiseRejectBlock)reject) {
-  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackDelegate;
   nativePageVC.delegate = self;
   _resolve = resolve;
-  navController.viewControllers = @[nativePageVC];
-  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
+  AppDelegate *mainDelegate = [self mainAppDelegate];
+  [mainDelegate.rootViewController.navigationController pushViewController:nativePageVC animated:YES];
 }
 - (void)delegateBtnClick:(NSString *)changeTitle {
   _resolve(changeTitle);
 }
 
 RCT_EXPORT_METHOD(pushNotiCallBack) {
-  UINavigationController *navController = [self navigationCont];
   
   NativePageViewController *nativePageVC = [[NativePageViewController alloc] init];
   nativePageVC.callBackType = CallBackNotification;
-  navController.viewControllers = @[nativePageVC];
-  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navController animated:YES completion:nil];
+  AppDelegate *mainDelegate = [self mainAppDelegate];
+  [mainDelegate.rootViewController.navigationController pushViewController:nativePageVC animated:YES];
 }
 
 
